@@ -1,0 +1,56 @@
+//TESTINT -- CONSTRUCTOR
+			double[] sampleData;
+			while((sampleData = this.getNextTrainSample()) != null);
+
+			for(int i=0; i < mean.Length; i++){
+				mean[i] /= (classes * trainSamplesPerClass);
+				mean[i] = Math.Round(mean[i], 3);
+			}
+
+			string maxString = string.Empty;
+			for(int i=0; i < max.Length; i++){
+				maxString += max[i];
+				maxString += i==(max.Length-1) ? string.Empty : ",";
+			}
+
+			string meanString = string.Empty;
+			for(int i=0; i < mean.Length; i++){
+				meanString += mean[i];
+				meanString += i==(mean.Length-1) ? string.Empty : ",";
+			}
+
+//-----------------
+
+//TESTINT -- readData()
+for(int i=0; i < data.Length; i++){
+				this.mean[i] += data[i];
+				this.max[i] = data[i] > this.max[i] ? data[i] : this.max[i];
+			}
+
+
+//-------------------
+
+string hidden1neuron0 = string.Empty;
+			for(int i=0; i < this.layer[0].neuron[0].weight.Length; i++)
+				hidden1neuron0 += this.layer[0].neuron[0].weight[i] + ",";
+			
+			string hidden1neuron1 = string.Empty;
+			for(int i=0; i < this.layer[0].neuron[1].weight.Length; i++)
+				hidden1neuron1 += this.layer[0].neuron[1].weight[i] + ",";
+
+			string hidden1neuron2 = string.Empty;
+			for(int i=0; i < this.layer[0].neuron[2].weight.Length; i++)
+				hidden1neuron2 += this.layer[0].neuron[2].weight[i] + ",";
+
+
+			string output1neuron0 = string.Empty;
+			for(int i=0; i < this.layer[1].neuron[0].weight.Length; i++)
+				output1neuron0 += this.layer[1].neuron[0].weight[i] + ",";
+
+			string output1neuron1 = string.Empty;
+			for(int i=0; i < this.layer[1].neuron[1].weight.Length; i++)
+				output1neuron1 += this.layer[1].neuron[1].weight[i] + ",";
+
+			string output1neuron2 = string.Empty;
+			for(int i=0; i < this.layer[1].neuron[2].weight.Length; i++)
+				output1neuron2 += this.layer[1].neuron[2].weight[i] + ",";
