@@ -12,10 +12,8 @@ namespace NeuralNetworks.MultilayerNetworks
         double[][] centroids;
         double[] sigma;
         int numClusters;
-        double centThresh = 1E-3;
-        double weightThresh = 1E-8;
-        double mseThresh = 1E-16;
-        //TODO: modify the archticure in MAin
+        //double centThresh = 1E-3;
+        double mseThresh = 0.1;
         public RBF(Layer[] layers, DataSetReader dataSet, double eta, int maxEpochs,int numClusters)
             : base(layers, dataSet, eta, maxEpochs)
         {
@@ -61,17 +59,18 @@ namespace NeuralNetworks.MultilayerNetworks
         private double calcMean(List<double[]> Error)
         {
             int numErrors = Error.Count;
-            double error = 0;
+            double error;
             int errorper=Error[0].Length;
             double realError=0;
             for(int i=0;i<numErrors;i++)
             {
+                error = 0;
                 for(int j=0;j<errorper;j++)
                 {
                     error += Math.Pow(Error[i][j],2);
                 }
                 error /= errorper;
-                realError += Math.Pow(error, 2);
+                realError += error;
             }
             realError /= numErrors;
             return realError;
@@ -103,7 +102,7 @@ namespace NeuralNetworks.MultilayerNetworks
             {
                 double[] def = calcDef(input, centroids[i]);
                 double mulRes = calcMult(def, def);
-                res[i] = Math.Exp(-mulRes)/(2*Math.Pow(sigma[i],2));
+                res[i] = Math.Exp(-mulRes/(2*Math.Pow(sigma[i],2)));
             }
                 return res;
         }
@@ -128,13 +127,15 @@ namespace NeuralNetworks.MultilayerNetworks
 
         private void initClusters()
         {
-            int numClass = this.dataSet.trainSamplesPerClass;
             centroids = new double[numClusters][];
-            int size =numClass *3;
-            int count = size / numClusters;
-            clusters = new List<double[]>[numClusters];
+            Random r = new Random(Guid.NewGuid().GetHashCode()); ;
             for (int i = 0; i < numClusters; i++)
-                centroids[i] = dataSet.getNextTestSample();
+            {
+                dataSet.setTrain(r.Next(0,150));
+                centroids[i] = dataSet.getNextTrainSample();
+                if (centroids[i] == null)
+                    i--;
+            }
             dataSet.resetTrainIndex();
         }
 
@@ -145,10 +146,12 @@ namespace NeuralNetworks.MultilayerNetworks
             double[] dist;
             while (clustChanged)
             {
+                clusters = new List<double[]>[numClusters];
+                for (int i = 0; i < numClusters; i++)
+                    clusters[i] = new List<double[]>();
                 while ((input = this.dataSet.getNextTrainSample()) != null)
                 {
-                    clusters = new List<double[]>[numClusters];
-                    dist = new double[numClusters];
+                        dist = new double[numClusters];
                     for (int i = 0; i < numClusters; i++)
                     {
                         dist[i] = getDistance(centroids[i], input);
@@ -196,7 +199,7 @@ namespace NeuralNetworks.MultilayerNetworks
                     for (int j = 0; j < size; j++)
                         res[i][j] += clusters[i][k][j];
                 for (int j = 0; j < size; j++)
-                    res[i][j] /= (double)size;
+                    res[i][j] /= (double)clustSize;
             }
                 return res;
         }

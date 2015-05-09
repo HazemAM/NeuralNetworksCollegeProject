@@ -58,16 +58,17 @@ namespace NeuralNetworks
         private void TestRBF()
         {
             //need to look into random init vectors from -1 to 1
+            int numCluster = 3;
             Layer output = new Layer(
                 new Neuron[] {
-					new Neuron(VectorTools.zeros(3), 1, 0, null, null),
-					new Neuron(VectorTools.zeros(3), 1, 0, null, null),
-					new Neuron(VectorTools.zeros(3), 1, 0, null, null),
+					new Neuron(VectorTools.zeros(numCluster), 1, 0, null, null),
+					new Neuron(VectorTools.zeros(numCluster), 1, 0, null, null),
+					new Neuron(VectorTools.zeros(numCluster), 1, 0, null, null),
 				}
                 );
             double eta = 0.25;
             int epochs = 50;
-            network = new RBF(new Layer[] { output }, headDataSet, eta, epochs,3);
+            network = new RBF(new Layer[] { output }, headDataSet, eta, epochs, numCluster);
         }
 		private void loadBestModel()
 		{
@@ -93,8 +94,8 @@ namespace NeuralNetworks
 
 		private void btnTrainMachine_Click(object sender, EventArgs e)
 		{
-			constructNetwork();
-
+			//constructNetwork();
+            TestRBF();
 			//Training:
 			if(chkBestModel.Checked)
 				network.loadWeights(originPath + "Training/(trained_weights)/");

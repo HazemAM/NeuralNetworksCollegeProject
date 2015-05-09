@@ -165,6 +165,10 @@ namespace NeuralNetworks
 			this.currentTestSample = 0;
 			this.currentTestClass = 0;
 		}
+        public void setTrain(int train)
+        {
+            this.currentTrainSample = train;
+        }
 
 		/// <summary>Normalize a single value using the data set normalization parameters.</summary>
 		/// <returns>The normalized value.</returns>
@@ -176,5 +180,6 @@ namespace NeuralNetworks
 
 			return result;
 		}
+
 	}
 }
