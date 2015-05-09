@@ -55,7 +55,20 @@ namespace NeuralNetworks
 			int epochs = (int)numMaxEpochs.Value;
 			network = new BackPropagation(layers, headDataSet, eta, epochs);
 		}
-
+        private void TestRBF()
+        {
+            //need to look into random init vectors from -1 to 1
+            Layer output = new Layer(
+                new Neuron[] {
+					new Neuron(VectorTools.zeros(3), 1, 0, null, null),
+					new Neuron(VectorTools.zeros(3), 1, 0, null, null),
+					new Neuron(VectorTools.zeros(3), 1, 0, null, null),
+				}
+                );
+            double eta = 0.25;
+            int epochs = 50;
+            network = new RBF(new Layer[] { output }, headDataSet, eta, epochs,3);
+        }
 		private void loadBestModel()
 		{
 			Layer hidden = new Layer(
