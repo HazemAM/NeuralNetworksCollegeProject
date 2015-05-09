@@ -94,8 +94,8 @@ namespace NeuralNetworks
 
 		private void btnTrainMachine_Click(object sender, EventArgs e)
 		{
-			//constructNetwork();
-            TestRBF();
+			constructNetwork();
+            //TestRBF();
 			//Training:
 			if(chkBestModel.Checked)
 				network.loadWeights(originPath + "Training/(trained_weights)/");

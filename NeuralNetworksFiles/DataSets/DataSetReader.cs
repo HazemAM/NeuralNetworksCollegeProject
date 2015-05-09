@@ -165,9 +165,10 @@ namespace NeuralNetworks
 			this.currentTestSample = 0;
 			this.currentTestClass = 0;
 		}
-        public void setTrain(int train)
+        public void setTrain(int train,int cl)
         {
             this.currentTrainSample = train;
+            this.currentTrainClass = cl;
         }
 
 		/// <summary>Normalize a single value using the data set normalization parameters.</summary>

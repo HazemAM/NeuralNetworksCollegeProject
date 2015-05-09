@@ -128,10 +128,10 @@ namespace NeuralNetworks.MultilayerNetworks
         private void initClusters()
         {
             centroids = new double[numClusters][];
-            Random r = new Random(Guid.NewGuid().GetHashCode()); ;
+            Random r = new Random(Guid.NewGuid().GetHashCode());
             for (int i = 0; i < numClusters; i++)
             {
-                dataSet.setTrain(r.Next(0,150));
+                dataSet.setTrain(r.Next(0,50),r.Next(0,3));
                 centroids[i] = dataSet.getNextTrainSample();
                 if (centroids[i] == null)
                     i--;
@@ -244,7 +244,16 @@ namespace NeuralNetworks.MultilayerNetworks
 
         public override void loadWeights(string parentPath)
         {
-            throw new NotImplementedException();
+             numClusters = 3;
+            layer[0] = new Layer(
+                new Neuron[] {
+                    new Neuron(new double []{-0.25397292653087766,-0.18968793844628154,1.4269604678027137} ,1, 0, null, null),
+                    new Neuron(new double []{1.4989730348322703,-0.035391555952650311,0.26121131742212395}, 1, 0, null, null),
+                    new Neuron(new double []{0.000590071626645792,1.4325712369802888,0.22273435125547633}, 1, 0, null, null)
+                }
+                );
+            eta = 0.25;
+            maxEpochs = 50;
         }
     }
 }
