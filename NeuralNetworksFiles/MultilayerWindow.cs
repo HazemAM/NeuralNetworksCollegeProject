@@ -10,18 +10,20 @@ namespace NeuralNetworks
 		DataSetReader headDataSet = new DataSetReader(originPath, DataSetType.HeadOrientation, true);
 		MultilayerNeuralNetwork network;
 
+        Type selectedNetwork;
+        Type[] networkType = new Type[] {
+            typeof(BackPropagation),
+            typeof(RBF)
+        };
+
 		public MultilayerWindow()
 		{
 			InitializeComponent();
+            cmboNetworkType.SelectedIndex = 0;
 		}
 
-		private void constructNetwork()
+		private void constructNetwork_BB()
 		{
-			if(chkBestModel.Checked){
-				loadBestModel();
-				return;
-			}
-
 			int neuronsCount = (int)numNeurons.Value;
 			int layersCount = (int)numLayers.Value;
 			int biasValue = (int)numBias.Value;
@@ -55,22 +57,25 @@ namespace NeuralNetworks
 			int epochs = (int)numMaxEpochs.Value;
 			network = new BackPropagation(layers, headDataSet, eta, epochs);
 		}
-        private void TestRBF()
+
+        private void constructNetwork_RBF()
         {
             //need to look into random init vectors from -1 to 1
-            int numCluster = 3;
+            int clusters = (int)numClusters.Value;
             Layer output = new Layer(
                 new Neuron[] {
-					new Neuron(VectorTools.zeros(numCluster), 1, 0, null, null),
-					new Neuron(VectorTools.zeros(numCluster), 1, 0, null, null),
-					new Neuron(VectorTools.zeros(numCluster), 1, 0, null, null),
+					new Neuron(VectorTools.zeros(clusters), 1, 0, null, null),
+					new Neuron(VectorTools.zeros(clusters), 1, 0, null, null),
+					new Neuron(VectorTools.zeros(clusters), 1, 0, null, null),
 				}
-                );
-            double eta = 0.25;
-            int epochs = 50;
-            network = new RBF(new Layer[] { output }, headDataSet, eta, epochs, numCluster);
+            );
+
+            double eta = (double)numEta.Value;
+            int epochs = (int)numMaxEpochs.Value;
+            network = new RBF(new Layer[] { output }, headDataSet, eta, epochs, clusters);
         }
-		private void loadBestModel()
+
+		private void loadBestModel_BB()
 		{
 			Layer hidden = new Layer(
 				new Neuron[] {
@@ -92,10 +97,35 @@ namespace NeuralNetworks
 			network = new BackPropagation(new Layer[] { hidden, output }, headDataSet, eta, epochs);
 		}
 
+        private void loadBestModel_RBF()
+		{
+            Layer output = new Layer(
+                new Neuron[] {
+                    new Neuron(new double[] {-0.25397292653087766, -0.18968793844628154, 1.4269604678027137} ,1, 0, null, null),
+                    new Neuron(new double[] {1.4989730348322703, -0.035391555952650311, 0.26121131742212395}, 1, 0, null, null),
+                    new Neuron(new double[] {0.000590071626645792, 1.4325712369802888, 0.22273435125547633}, 1, 0, null, null)
+                }
+            );
+
+            int clusters = 3;
+            double eta = 0.25;
+            int maxEpochs = 50;
+            network = new RBF(new Layer[] { output }, headDataSet, eta, maxEpochs, clusters);
+        }
+
 		private void btnTrainMachine_Click(object sender, EventArgs e)
 		{
-			constructNetwork();
-            //TestRBF();
+            if(selectedNetwork == typeof(BackPropagation))
+                if(chkBestModel.Checked)
+				    loadBestModel_BB();
+                else
+                    constructNetwork_BB();
+            else if(selectedNetwork == typeof(RBF))
+                if(chkBestModel.Checked)
+				    loadBestModel_RBF();
+                else
+                    constructNetwork_RBF();
+
 			//Training:
 			if(chkBestModel.Checked)
 				network.loadWeights(originPath + "Training/(trained_weights)/");
@@ -158,5 +188,25 @@ namespace NeuralNetworks
 			btnTestMachine.Enabled = false;
 			btnClassify.Enabled = false;
 		}
+
+        private void cmboNetworkType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox combo = sender as ComboBox;
+            selectedNetwork = networkType[combo.SelectedIndex];
+
+            if(selectedNetwork == typeof(BackPropagation)){
+                numLayers.Enabled = true;
+                numNeurons.Enabled = true;
+                numBias.Enabled = true;
+                numClusters.Enabled = false;
+            }
+            else if(selectedNetwork == typeof(RBF)){
+                numLayers.Enabled = false;
+                numNeurons.Enabled = false;
+                numBias.Enabled = false;
+                numClusters.Enabled = true;
+            }
+            else { /*DO NOTHING*/ }
+        }
 	}
 }
