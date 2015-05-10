@@ -226,25 +226,25 @@ namespace NeuralNetworks.MultilayerNetworks
                 classOut = classify(lineData);
                 confMatrix[this.dataSet.currentTestClass, classOut]++;
             }
-            string[] arr = new string[3];
-            for (int i = 0; i < 2500; i++)
-            {
-                arr[0] += centroids[0][i] + ",";
-                arr[1] += centroids[1][i] + ",";
-                arr[2] += centroids[2][i] + ",";
-            }
-            arr = new string[3];
-            for (int i = 0; i < 3; i++)
-            {
-                arr[0] += layer[0].neuron[0].weight[i] + ",";
-                arr[1] += layer[0].neuron[1].weight[i] + ",";
-                arr[2] += layer[0].neuron[2].weight[i] + ",";
-            }
-            arr = new string[3];
-            for (int i = 0; i < 3; i++)
-            {
-                arr[i] += sigma[i];
-            }
+            //string[] arr = new string[3];
+            //for (int i = 0; i < 2500; i++)
+            //{
+            //    arr[0] += centroids[0][i] + ",";
+            //    arr[1] += centroids[1][i] + ",";
+            //    arr[2] += centroids[2][i] + ",";
+            //}
+            //arr = new string[3];
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    arr[0] += layer[0].neuron[0].weight[i] + ",";
+            //    arr[1] += layer[0].neuron[1].weight[i] + ",";
+            //    arr[2] += layer[0].neuron[2].weight[i] + ",";
+            //}
+            //arr = new string[3];
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    arr[i] += sigma[i];
+            //}
             return confMatrix;
             
         }
