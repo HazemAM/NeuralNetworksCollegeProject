@@ -6,6 +6,8 @@ namespace NeuralNetworks
 {
 	public partial class MultilayerWindow : Form
 	{
+        string titleBase;
+
 		static string originPath = "../../../DataSets/HeadOrientation/";
 		DataSetReader headDataSet = new DataSetReader(originPath, DataSetType.HeadOrientation, true);
 		MultilayerNeuralNetwork network;
@@ -19,6 +21,7 @@ namespace NeuralNetworks
 		public MultilayerWindow()
 		{
 			InitializeComponent();
+            titleBase = this.Text;
             cmboNetworkType.SelectedIndex = 0;
 		}
 
@@ -188,6 +191,9 @@ namespace NeuralNetworks
             ComboBox combo = sender as ComboBox;
             selectedNetwork = networkType[combo.SelectedIndex];
 
+            //UI:
+            changeTitle();
+
             btnTestMachine.Enabled = false;
             btnClassify.Enabled = false;
 
@@ -223,6 +229,19 @@ namespace NeuralNetworks
                 numMaxEpochs.Enabled = true;
                 numEta.Enabled = true;
             }
+        }
+
+        private void changeTitle()
+        {
+            string plus = string.Empty;
+            if(selectedNetwork == typeof(BackPropagation))
+                plus = "MLP";
+            else if(selectedNetwork == typeof(RBF))
+                plus = "RBF";
+
+            this.Text = plus != string.Empty
+                ? titleBase + ": " + plus
+                : titleBase;
         }
 	}
 }

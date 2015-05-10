@@ -353,11 +353,11 @@
             this.cmboNetworkType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmboNetworkType.FormattingEnabled = true;
             this.cmboNetworkType.Items.AddRange(new object[] {
-            "Backpropagation",
-            "Radial Basis Function"});
+            "Backpropagation (MLP)",
+            "Least Mean Square (RBF)"});
             this.cmboNetworkType.Location = new System.Drawing.Point(29, 13);
             this.cmboNetworkType.Name = "cmboNetworkType";
-            this.cmboNetworkType.Size = new System.Drawing.Size(142, 21);
+            this.cmboNetworkType.Size = new System.Drawing.Size(156, 21);
             this.cmboNetworkType.TabIndex = 34;
             this.cmboNetworkType.SelectedIndexChanged += new System.EventHandler(this.cmboNetworkType_SelectedIndexChanged);
             // 
@@ -402,7 +402,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MultilayerWindow";
-            this.Text = "Multilayer Perceptron";
+            this.Text = "Neural Networks";
             ((System.ComponentModel.ISupportInitialize)(this.numEta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridConfMatrix)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxEpochs)).EndInit();
