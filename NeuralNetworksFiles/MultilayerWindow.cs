@@ -177,13 +177,7 @@ namespace NeuralNetworks
 
 		private void chkBestModel_CheckedChanged(object sender, EventArgs e)
 		{
-			bool newValue = !(sender as CheckBox).Checked;
-			
-			numLayers.Enabled = newValue;
-			numNeurons.Enabled = newValue;
-			numBias.Enabled = newValue;
-			numMaxEpochs.Enabled = newValue;
-			numEta.Enabled = newValue;
+            changeEnableState();
 
 			btnTestMachine.Enabled = false;
 			btnClassify.Enabled = false;
@@ -194,19 +188,41 @@ namespace NeuralNetworks
             ComboBox combo = sender as ComboBox;
             selectedNetwork = networkType[combo.SelectedIndex];
 
-            if(selectedNetwork == typeof(BackPropagation)){
-                numLayers.Enabled = true;
-                numNeurons.Enabled = true;
-                numBias.Enabled = true;
-                numClusters.Enabled = false;
-            }
-            else if(selectedNetwork == typeof(RBF)){
+            btnTestMachine.Enabled = false;
+            btnClassify.Enabled = false;
+
+            changeEnableState();
+        }
+
+        private void changeEnableState()
+        {
+            if(chkBestModel.Checked){
                 numLayers.Enabled = false;
                 numNeurons.Enabled = false;
                 numBias.Enabled = false;
-                numClusters.Enabled = true;
+                numClusters.Enabled = false;
+
+                numMaxEpochs.Enabled = false;
+                numEta.Enabled = false;
             }
-            else { /*DO NOTHING*/ }
+
+            else{
+                if(selectedNetwork == typeof(BackPropagation)){
+                    numLayers.Enabled = true;
+                    numNeurons.Enabled = true;
+                    numBias.Enabled = true;
+                    numClusters.Enabled = false;
+                }
+                else if(selectedNetwork == typeof(RBF)){
+                    numLayers.Enabled = false;
+                    numNeurons.Enabled = false;
+                    numBias.Enabled = false;
+                    numClusters.Enabled = true;
+                }
+
+                numMaxEpochs.Enabled = true;
+                numEta.Enabled = true;
+            }
         }
 	}
 }

@@ -39,6 +39,7 @@
             this.numLayers = new System.Windows.Forms.NumericUpDown();
             this.numNeurons = new System.Windows.Forms.NumericUpDown();
             this.numBias = new System.Windows.Forms.NumericUpDown();
+            this.numClusters = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.txtClassifyPath = new System.Windows.Forms.TextBox();
             this.btnClassify = new System.Windows.Forms.Button();
@@ -52,7 +53,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cmboNetworkType = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.numClusters = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numEta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridConfMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxEpochs)).BeginInit();
@@ -73,7 +73,7 @@
             0,
             0,
             65536});
-            this.numEta.Location = new System.Drawing.Point(166, 153);
+            this.numEta.Location = new System.Drawing.Point(166, 159);
             this.numEta.Maximum = new decimal(new int[] {
             1,
             0,
@@ -138,7 +138,7 @@
             // 
             this.btnTrainMachine.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnTrainMachine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrainMachine.Location = new System.Drawing.Point(182, 179);
+            this.btnTrainMachine.Location = new System.Drawing.Point(182, 185);
             this.btnTrainMachine.Name = "btnTrainMachine";
             this.btnTrainMachine.Size = new System.Drawing.Size(79, 46);
             this.btnTrainMachine.TabIndex = 13;
@@ -156,7 +156,7 @@
             0,
             0,
             0});
-            this.numMaxEpochs.Location = new System.Drawing.Point(226, 153);
+            this.numMaxEpochs.Location = new System.Drawing.Point(226, 159);
             this.numMaxEpochs.Maximum = new decimal(new int[] {
             90000,
             0,
@@ -226,6 +226,24 @@
             0,
             0});
             // 
+            // numClusters
+            // 
+            this.numClusters.Location = new System.Drawing.Point(89, 239);
+            this.numClusters.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numClusters.Name = "numClusters";
+            this.numClusters.Size = new System.Drawing.Size(47, 20);
+            this.numClusters.TabIndex = 35;
+            this.toolTip.SetToolTip(this.numClusters, "Number of clusters in RBF");
+            this.numClusters.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // label1
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -287,7 +305,7 @@
             this.btnTestMachine.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnTestMachine.Enabled = false;
             this.btnTestMachine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTestMachine.Location = new System.Drawing.Point(182, 225);
+            this.btnTestMachine.Location = new System.Drawing.Point(182, 231);
             this.btnTestMachine.Name = "btnTestMachine";
             this.btnTestMachine.Size = new System.Drawing.Size(79, 23);
             this.btnTestMachine.TabIndex = 26;
@@ -351,24 +369,6 @@
             this.label7.Size = new System.Drawing.Size(47, 13);
             this.label7.TabIndex = 36;
             this.label7.Text = "Clusters:";
-            // 
-            // numClusters
-            // 
-            this.numClusters.Location = new System.Drawing.Point(89, 239);
-            this.numClusters.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numClusters.Name = "numClusters";
-            this.numClusters.Size = new System.Drawing.Size(47, 20);
-            this.numClusters.TabIndex = 35;
-            this.toolTip.SetToolTip(this.numClusters, "Number of clusters in RBF");
-            this.numClusters.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // MultilayerWindow
             // 
