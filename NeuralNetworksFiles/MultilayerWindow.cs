@@ -101,9 +101,9 @@ namespace NeuralNetworks
 		{
             Layer output = new Layer(
                 new Neuron[] {
-                    new Neuron(new double[] {-0.189687938446281,1.42696046780271,-0.253972926530878} ,1, 0, null, null),
-                    new Neuron(new double[] {-0.0353915559526503,0.261211317422124,1.49897303483227}, 1, 0, null, null),
-                    new Neuron(new double[] {1.43257123698029,0.222734351255476,0.000590071626645792}, 1, 0, null, null)
+                    new Neuron(new double[] {-0.189687938446282,-0.253972926530878,1.42696046780271} ,1, 0, null, null),
+                    new Neuron(new double[] {-0.0353915559526503,1.49897303483227,0.261211317422124}, 1, 0, null, null),
+                    new Neuron(new double[] {1.43257123698029,0.000590071626645792,0.222734351255476}, 1, 0, null, null)
                 }
             );
 
